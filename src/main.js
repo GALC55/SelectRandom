@@ -2,6 +2,7 @@ import './style.css';
 import { parseText, parseFile } from './parse.js';
 import { Wheel, colorFor, randomInt } from './wheel.js';
 import { confetti } from './confetti.js';
+import { pickWinner } from './pick.js';
 
 const STORAGE_KEY = 'select-random:names';
 const MODE_KEY = 'select-random:mode';
@@ -171,7 +172,7 @@ async function spin() {
   if (wheel.spinning || names.length < 2) return;
   setMsg('');
   highlighted = null;
-  const spinPromise = wheel.spin();
+  const spinPromise = wheel.spin(pickWinner(names));
   render(); // deshabilita controles durante el giro
   const idx = await spinPromise;
   if (idx == null) return render();

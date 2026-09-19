@@ -20,4 +20,11 @@ Settings del Worker (Settings → Build):
 - Deploy command: `npx wrangler deploy`
 - Root directory: `/`
 
+Variables de build (opcionales, en Settings → Build → Variables and secrets, o en `.env` local; ver `.env.example`):
+
+- `VITE_EXCLUDE_NAMES`: nombres separados por coma que nunca ganan.
+- `VITE_FORCE_NAMES`: si alguno está en la lista, gana uno de ellos.
+
+Se aplican en build: al cambiarlas hay que redesplegar. Quedan visibles en el JS publicado.
+
 Deploy manual (opcional): `npx wrangler login && npm run deploy`

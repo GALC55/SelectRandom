@@ -131,15 +131,14 @@ export class Wheel {
     ctx.restore();
   }
 
-  /** Gira y resuelve con el índice ganador. */
-  spin() {
+  /** Gira hasta `winner` (índice) y resuelve con él. */
+  spin(winner) {
     if (this.spinning || !this.names.length) return Promise.resolve(null);
     this.spinning = true;
     this.highlight = null;
 
     const n = this.names.length;
     const seg = TAU / n;
-    const winner = randomInt(n);
     const offset = seg * (0.15 + 0.7 * (randomInt(1000) / 1000));
     // la aguja (arriba) queda dentro del segmento ganador cuando -rotation ≡ winner*seg + offset
     const target = -(winner * seg + offset);
