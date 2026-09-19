@@ -48,6 +48,67 @@ body {
   color: var(--muted);
 }
 
+/* Modos */
+.modes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 8px auto 12px;
+}
+
+.segmented {
+  display: inline-flex;
+  padding: 4px;
+  gap: 4px;
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+.segmented label {
+  position: relative;
+}
+
+.segmented input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.segmented span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.segmented input:checked + span {
+  background: var(--accent);
+  color: #fff;
+}
+
+.segmented input:focus-visible + span {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
+.segmented input:disabled + span {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.mode-hint {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-align: center;
+}
+
 .layout {
   max-width: 1100px;
   margin: 0 auto;
@@ -321,6 +382,16 @@ textarea:focus {
   max-width: 100%;
 }
 
+.list li.is-winner {
+  background: var(--accent-2);
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+.list li.is-winner button {
+  color: #1a1a1a;
+}
+
 .list li span {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -366,6 +437,16 @@ textarea:focus {
 .winner-dialog::backdrop {
   background: rgb(0 0 0 / 0.6);
   backdrop-filter: blur(3px);
+}
+
+.winner-trophy {
+  margin: 0 0 4px;
+  font-size: 3rem;
+  line-height: 1;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 .winner-label {

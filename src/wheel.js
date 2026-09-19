@@ -32,6 +32,7 @@ export class Wheel {
     this.names = [];
     this.rotation = 0;
     this.spinning = false;
+    this.highlight = null; // índice resaltado (modo ganador)
     new ResizeObserver(() => this.resize()).observe(canvas);
     this.resize();
   }
@@ -42,6 +43,11 @@ export class Wheel {
     if (!size) return;
     this.canvas.width = Math.round(size * dpr);
     this.canvas.height = Math.round(size * dpr);
+    this.draw();
+  }
+
+  setHighlight(index) {
+    this.highlight = index;
     this.draw();
   }
 
@@ -89,6 +95,10 @@ export class Wheel {
       ctx.closePath();
       ctx.fillStyle = color;
       ctx.fill();
+      if (this.highlight != null && i !== this.highlight) {
+        ctx.fillStyle = 'rgba(20,18,31,0.62)';
+        ctx.fill();
+      }
       if (n > 1) {
         ctx.strokeStyle = 'rgba(20,18,31,0.35)';
         ctx.lineWidth = Math.max(1, size / 400);
@@ -99,12 +109,24 @@ export class Wheel {
         ctx.save();
         ctx.rotate(i * seg + seg / 2);
         ctx.fillStyle = textColor(color);
+        if (this.highlight != null && i !== this.highlight) ctx.globalAlpha = 0.4;
         ctx.font = `700 ${fontSize}px system-ui, sans-serif`;
         ctx.textAlign = 'right';
         ctx.textBaseline = 'middle';
         ctx.fillText(fit(ctx, names[i], maxTextW), r * 0.92, 0);
         ctx.restore();
       }
+    }
+    if (this.highlight != null && this.highlight < n) {
+      const i = this.highlight;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.arc(0, 0, r - size / 200, i * seg, (i + 1) * seg);
+      ctx.closePath();
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = size / 110;
+      ctx.lineJoin = 'round';
+      ctx.stroke();
     }
     ctx.restore();
   }
@@ -113,6 +135,7 @@ export class Wheel {
   spin() {
     if (this.spinning || !this.names.length) return Promise.resolve(null);
     this.spinning = true;
+    this.highlight = null;
 
     const n = this.names.length;
     const seg = TAU / n;

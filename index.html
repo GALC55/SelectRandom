@@ -14,6 +14,14 @@
       <p class="sub">Carga los nombres, gira la ruleta y deja que decida la suerte.</p>
     </header>
 
+    <nav class="modes" aria-label="Modo">
+      <div class="segmented" role="radiogroup">
+        <label><input type="radio" name="mode" value="select" checked /><span>Selección</span></label>
+        <label><input type="radio" name="mode" value="winner" /><span>Ganador</span></label>
+      </div>
+      <p id="mode-hint" class="mode-hint"></p>
+    </nav>
+
     <main class="layout">
       <section class="wheel-area" aria-label="Ruleta">
         <div class="wheel-wrap">
@@ -50,19 +58,21 @@
             <button id="clear" class="btn ghost small danger" type="button">Borrar todo</button>
           </div>
         </div>
-        <label class="check">
+        <label id="remove-winner-wrap" class="check">
           <input id="remove-winner" type="checkbox" />
-          Quitar al ganador después de cada giro
+          Quitar el nombre elegido después de cada giro
         </label>
         <ul id="list" class="list"></ul>
       </section>
     </main>
 
     <dialog id="winner-dialog" class="winner-dialog">
-      <p class="winner-label">Resultado</p>
+      <p id="winner-trophy" class="winner-trophy" aria-hidden="true">🏆</p>
+      <p id="winner-label" class="winner-label">Resultado</p>
       <p id="winner-name" class="winner-name"></p>
       <div class="row center">
         <button id="winner-remove" class="btn ghost" type="button">Quitar de la lista</button>
+        <button id="winner-again" class="btn ghost" type="button">Girar de nuevo</button>
         <button id="winner-close" class="btn primary" type="button">Continuar</button>
       </div>
       <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
