@@ -78,5 +78,5 @@ export async function parseFile(file) {
   if (ext === 'csv') return parseCsv(await file.text());
   if (ext === 'txt') return parseText(await file.text());
   if (['xlsx', 'xls', 'ods'].includes(ext)) return parseSpreadsheet(file);
-  throw new Error('Formato no soportado. Usá .csv, .txt, .xlsx, .xls u .ods');
+  throw new Error('Formato no soportado. Usa .csv, .txt, .xlsx, .xls u .ods');
 }

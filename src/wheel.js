@@ -67,7 +67,7 @@ export class Wheel {
       ctx.font = `600 ${Math.round(size * 0.045)}px system-ui, sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('Agregá nombres', 0, -r * 0.42);
+      ctx.fillText('Agrega nombres', 0, -r * 0.42);
       ctx.restore();
       return;
     }

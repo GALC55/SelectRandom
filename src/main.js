@@ -61,7 +61,7 @@ function render() {
   if (!names.length) {
     const li = document.createElement('li');
     li.className = 'empty';
-    li.textContent = 'Todavía no hay nombres.';
+    li.textContent = 'Aún no hay nombres.';
     els.list.append(li);
   }
 
@@ -124,7 +124,7 @@ async function spin() {
   pendingWinner = idx;
   const name = names[idx];
   els.winnerName.textContent = name;
-  els.lastWinner.replaceChildren('Último ganador: ', Object.assign(document.createElement('strong'), { textContent: name }));
+  els.lastWinner.replaceChildren('Último resultado: ', Object.assign(document.createElement('strong'), { textContent: name }));
   els.dialog.showModal();
   confetti(els.confetti);
   navigator.vibrate?.(80);
