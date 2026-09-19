@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#14121f" />
+    <meta name="description" content="Ruleta aleatoria: cargá nombres a mano, CSV o Excel y girá para elegir uno al azar." />
+    <title>Ruleta de nombres</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="top">
+      <h1>Ruleta de nombres</h1>
+      <p class="sub">Cargá nombres, girá y que decida la suerte.</p>
+    </header>
+
+    <main class="layout">
+      <section class="wheel-area" aria-label="Ruleta">
+        <div class="wheel-wrap">
+          <div class="pointer" aria-hidden="true"></div>
+          <canvas id="wheel" role="img" aria-label="Ruleta con los nombres"></canvas>
+          <button id="spin-center" class="spin-center" type="button" aria-label="Girar">GIRAR</button>
+        </div>
+        <button id="spin" class="btn primary big" type="button">Girar la ruleta</button>
+        <p id="last-winner" class="last-winner" aria-live="polite"></p>
+      </section>
+
+      <section class="panel" aria-label="Nombres">
+        <div class="field">
+          <label for="names-input">Agregar nombres</label>
+          <textarea
+            id="names-input"
+            rows="3"
+            placeholder="Ana, Beto, Carla&#10;(separados por coma o uno por línea)"
+          ></textarea>
+          <div class="row">
+            <button id="add" class="btn primary" type="button">Agregar</button>
+            <label class="btn file-btn">
+              Subir CSV / Excel
+              <input id="file" type="file" accept=".csv,.txt,.xlsx,.xls,.ods" hidden />
+            </label>
+          </div>
+          <p id="msg" class="msg" aria-live="polite"></p>
+        </div>
+
+        <div class="list-head">
+          <h2>Participantes <span id="count" class="count">0</span></h2>
+          <div class="row tight">
+            <button id="shuffle" class="btn ghost small" type="button">Mezclar</button>
+            <button id="clear" class="btn ghost small danger" type="button">Vaciar</button>
+          </div>
+        </div>
+        <label class="check">
+          <input id="remove-winner" type="checkbox" />
+          Quitar al ganador después de cada giro
+        </label>
+        <ul id="list" class="list"></ul>
+      </section>
+    </main>
+
+    <dialog id="winner-dialog" class="winner-dialog">
+      <p class="winner-label">¡Salió!</p>
+      <p id="winner-name" class="winner-name"></p>
+      <div class="row center">
+        <button id="winner-remove" class="btn ghost" type="button">Quitar de la lista</button>
+        <button id="winner-close" class="btn primary" type="button">Seguir</button>
+      </div>
+      <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
